@@ -2,13 +2,28 @@
 
 function IndexController() {
 
-  var lastPulse;
-
-  setInterval(function() {
-    $.getJSON("http://sensor-api.localdata.com/api/v1/sources/ci4tmxpz8000002w7au38un50/entries.geojson?count=1&sort=desc", function(d) {
-      console.log(d);
+  function initMap() {
+    var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',{
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
     });
-  }, 1000);
+
+    var map = L.map('map', {
+        scrollWheelZoom: false,
+        center: [0,0],
+        zoom: 2
+    });
+
+    map.addLayer(layer);
+  }
+
+  function init() {
+    initMap();
+  }
+
+  //
+  // Go!
+  //
+  init();
 
 }
 
